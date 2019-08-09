@@ -1,21 +1,10 @@
-// import React, { useState, useEffect } from 'react';
 import React from 'react';
-
 import axios from 'axios';
-import { Form, Button } from 'semantic-ui-react';
-// import { Form, Button, List, Header } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 import { Form as FormUser, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
-const UserForm = ({ errors, touched, status, isSubmitting }) => {
-    // const [user, setUser] = useState([]);
-
-    // useEffect(() => {
-    //     if (status) {
-    //         setUser([...user, status]);
-    //     }
-    // }, [status]);
-
+const UserForm = ({ errors, touched, isSubmitting }) => {
     return (
         <div className="register-form">
             <h1>Register</h1>
@@ -40,16 +29,6 @@ const UserForm = ({ errors, touched, status, isSubmitting }) => {
                     <Button type="submit" disabled={isSubmitting}>Sign Up</Button>
                 </Form>
             </FormUser>
-
-            {/* <Header as="h1">Sign Up List:</Header>
-            <List horizontal link>
-                {user.map(users => (
-                    <List.Item as='a'>
-                        <p key={users.id}>{users.name}</p>
-                    </List.Item>
-                ))}
-            </List> */}
-
         </div>
     );
 };
@@ -75,19 +54,19 @@ const RegisterForm = withFormik({
         if (values.username === "vyue001") {
             setErrors({ username: "That username is already taken" });
             setSubmitting(false);
-        } 
+        }
 
         axios.post('http://localhost:5000/api/register', values)
-        .then(res => {
-            console.log(res)
-            setStatus(res.data);
-            resetForm();
-            setSubmitting(false);
-        })
-        .catch(err => {
-            console.log(err.response);
-            setSubmitting(false);
-        });
+            .then(res => {
+                console.log(res)
+                setStatus(res.data);
+                resetForm();
+                setSubmitting(false);
+            })
+            .catch(err => {
+                console.log(err.response);
+                setSubmitting(false);
+            });
     }
 
 })(UserForm);
