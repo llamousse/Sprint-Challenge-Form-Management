@@ -16,17 +16,22 @@ class App extends React.Component {
     this.fetchUser();
   };
 
+  componentWillUnmount() {
+    this.setState({ recipes: [] });
+    this.setState({ errorMessage: "recipe not found" });
+  }
+
   fetchUser = () => {
     axios.get("http://localhost:5000/api/restricted/data")
       .then(response => {
-        console.log("recipes data", response.data)
+        // console.log("recipes data", response.data)
         this.setState({ recipes: response.data });
         // console.log(this.state.recipes)
       })
       .catch(err => {
         console.log("Error: Something went wrong while loading recipes.", err);
         this.setState({ recipes: [] });
-        this.setState({ errorMessage: "user not found" });
+        this.setState({ errorMessage: "recipe not found" });
       })
   }
 
@@ -34,7 +39,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <RegisterForm />
-
         <h1>Recipes</h1>
         {this.state.recipes.map(recipe => {
           return (

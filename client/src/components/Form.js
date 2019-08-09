@@ -26,7 +26,7 @@ const UserForm = ({ errors, touched, isSubmitting }) => {
 
                     <br />
 
-                    <Button type="submit" disabled={isSubmitting}>Sign Up</Button>
+                    <Button onClick={RegisterForm} type="submit" disabled={isSubmitting}>Sign Up</Button>
                 </Form>
             </FormUser>
         </div>
